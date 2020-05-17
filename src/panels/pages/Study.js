@@ -8,7 +8,12 @@ import {
   CardScroll,
   Div,
   Card,
-  Text
+  Text,
+  Caption,
+  List,
+  Cell,
+  RichCell,
+  SimpleCell
 } from '@vkontakte/vkui';
 import { ReactComponent as PaperIcon } from '../../img/icons/paper.svg';
 import { ReactComponent as GlassIcon } from '../../img/icons/glass.svg';
@@ -19,11 +24,13 @@ import { ReactComponent as DangerousIcon } from '../../img/icons/dangerous.svg';
 import { ReactComponent as LampIcon } from '../../img/icons/lamp.svg';
 import { ReactComponent as TetrapakIcon } from '../../img/icons/tetrapak.svg';
 import { ReactComponent as PlasticIcon } from '../../img/icons/plastic.svg';
+import Icon28DoneOutline from '@vkontakte/icons/dist/28/done_outline';
 
-import data from '../../services/data'
+import data from '../../services/data';
 
 const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
-  const item = data[0]
+  const item = data[0];
+
   return (
     <Panel id={id}>
       <PanelHeader>Обучение</PanelHeader>
@@ -91,7 +98,6 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
               </Text>
             </Div>
           </CardScroll>
-
         </Group>
       )}
       {true && (
@@ -173,6 +179,84 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
           </Div>
         </Group>
       )}
+      {true &&
+        item.sections.map((el, i) => {
+          if (el.type == 'scroll') {
+            return (
+              <Group
+                header={<Header mode="secondary">{el.title}</Header>}
+                description={el.description}
+                separator="hide"
+                key={i}
+              >
+                <CardScroll>
+                  {el.content.map((Waste) => {
+                    return (
+                      <div key={Waste.name}>
+                        <Div>
+                          <Card className="icon-card--small " mode="shadow">
+                            <div className="icon--centered">{Waste.icon}</div>
+                          </Card>
+                          <Caption
+                            level="1"
+                            weight="regular"
+                            className="icon-text"
+                          >
+                            {Waste.name}
+                          </Caption>
+                        </Div>
+                      </div>
+                    );
+                  })}
+                </CardScroll>
+              </Group>
+            );
+          } else if (el.type === 'checklist') {
+            return (
+              <Group
+                header={<Header mode="secondary">{el.title}</Header>}
+                description={el.description}
+                key={i}
+                separator="hide"
+              >
+                <List>
+                  {el.content.map((check, i) => {
+                    return (
+                      <SimpleCell
+                        multiline
+                        key={i}
+                        before={
+                          <Icon28DoneOutline style={{ color: '#4bb34b' }} />
+                        }
+                      >
+                        {check.name}
+                      </SimpleCell>
+                    );
+                  })}
+                </List>
+              </Group>
+            );
+          } else if (el.type === 'list') {
+            return (
+              <Group
+                header={<Header mode="secondary">{el.title}</Header>}
+                description={el.description}
+                key={i}
+                separator="hide"
+              >
+                <List>
+                  {el.content.map((check, i) => {
+                    return (
+                      <Cell description={check.description} multiline key={i} before={check.icon}>
+                        {check.name}
+                      </Cell>
+                    );
+                  })}
+                </List>
+              </Group>
+            );
+          }
+        })}
     </Panel>
   );
 };

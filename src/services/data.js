@@ -1,4 +1,5 @@
 import { ReactComponent as LampIcon } from '../img/icons/lamp.svg';
+import React from 'react';
 const data = [
   {
     id: 'paper',
@@ -10,7 +11,7 @@ const data = [
         content: [
           {
             name: 'Макулатура',
-            icon: LampIcon,
+            icon: <LampIcon />,
             tooltip: 'Только в чистом виде'
           }
         ]
@@ -21,7 +22,7 @@ const data = [
         content: [
           {
             name: 'Макулатура',
-            icon: LampIcon,
+            icon: '',
             tooltip: 'Только в чистом виде'
           }
         ]
@@ -31,8 +32,21 @@ const data = [
         type: 'checklist',
         content: [
           {
-            name: 'Макулатура',
-            icon: LampIcon
+            name:
+              'Отчистить от скрепок и пластиковых предметов, снять ламинацию',
+            description: ''
+          }
+        ]
+      },
+      {
+        title: 'Как сдавать',
+        type: 'list',
+        content: [
+          {
+            icon: <LampIcon />,
+            name:
+              'Отчистить от скрепок и пластиковых предметов, снять ламинацию',
+            description: 'Долгое Долгое Долгое Долгое Долгое Долгое Долгое Долгое Долгое Долгое '
           }
         ]
       }

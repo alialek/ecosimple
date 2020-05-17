@@ -76,14 +76,14 @@ const App = () => {
     });
     async function fetchData() {
       const user = await bridge.send('VKWebAppGetUserInfo');
-      // await axios
-      //   .post('https://c21282b6.ngrok.io/eco/api/vk/auth', queryParams)
-      //   .then((resp) => {
-      //     console.log(resp);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
+      await axios
+        .post('https://app.netquest.ru/eco/api/vk/auth', queryParams)
+        .then((resp) => {
+          localStorage.setItem('token', resp.data.token)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
       const storageData = await bridge.send('VKWebAppStorageGet', {
         keys: Object.values(STORAGE_KEYS)
       });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import data from '../services/data';
 
+
 import {
   Panel,
   PanelHeader,
@@ -17,12 +18,13 @@ import {
 import Icon28CubeBoxOutline from '@vkontakte/icons/dist/28/cube_box_outline';
 import Icon28ArticleOutline from '@vkontakte/icons/dist/28/article_outline';
 import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
-import Icon56PlaceOutline from '@vkontakte/icons/dist/56/place_outline';
+
 import Icon28Profile from '@vkontakte/icons/dist/28/profile';
 import Icon36Add from '@vkontakte/icons/dist/36/add';
 import AddModal from '../components/AddModal';
 
 import Profile from './pages/Profile';
+import Location from './pages/Location';
 import Substudy from './pages/sub-study/Substudy';
 import Study from './pages/Study';
 
@@ -172,20 +174,8 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
         </Panel>
       </View>
       <View id={PAGES.GEO} activePanel={PAGES.GEO}>
-        <Panel centered="true" id={PAGES.GEO}>
-          <PanelHeader>Пункты приема</PanelHeader>
-          <Panel>
-            <Placeholder
-              icon={<Icon56PlaceOutline />}
-              header="Нет доступа к местоположению"
-              action={<Button size="l">Я передумал, дать доступ</Button>}
-            >
-              Вы не разрешили доступ к своему местоположению, поэтому мы не
-              можем определить ближайшие пункты приема :(
-            </Placeholder>
-          </Panel>
-        </Panel>
-      </View>
+      <Location id={PAGES.GEO}></Location>
+      </View> 
       <View id={PAGES.PROFILE} activePanel={PAGES.PROFILE}>
         <Profile id={PAGES.PROFILE}></Profile>
       </View>
