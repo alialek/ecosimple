@@ -152,7 +152,7 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
       <View id={PAGES.STUDY} activePanel={PAGES.STUDY}>
         <Study
           id={PAGES.STUDY}
-          openSubPage={(openSubPage, onPageChange)}
+          openSubPage={(openSubPage)}
           categories={CATEGORIES}
         ></Study>
       </View>

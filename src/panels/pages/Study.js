@@ -20,8 +20,10 @@ import { ReactComponent as LampIcon } from '../../img/icons/lamp.svg';
 import { ReactComponent as TetrapakIcon } from '../../img/icons/tetrapak.svg';
 import { ReactComponent as PlasticIcon } from '../../img/icons/plastic.svg';
 
-const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
+import data from '../../services/data'
 
+const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
+  const item = data[0]
   return (
     <Panel id={id}>
       <PanelHeader>Обучение</PanelHeader>
@@ -89,6 +91,7 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
               </Text>
             </Div>
           </CardScroll>
+
         </Group>
       )}
       {true && (
