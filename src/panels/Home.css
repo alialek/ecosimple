@@ -33,7 +33,7 @@
   background: rgba(251, 72, 132, 0.12) !important;
 }
 .icon-card--red svg {
-  fill: #FB4884 !important;
+  fill: #fb4884 !important;
 }
 .icon-card--orange {
   background: rgba(255, 160, 0, 0.12) !important;
@@ -42,9 +42,27 @@
   fill: #ffa000 !important;
 }
 
+
+.icon-card--violet svg {
+  fill: #b52dd7 !important;
+}
+.icon-card--gold svg {
+  fill: #ab9871 !important;
+}
+.icon-card--brown svg {
+  fill: #522e2e !important;
+}
+.icon-card--pink svg {
+  fill: #e6457a !important;
+}
+.icon-card--emerald svg {
+  fill: #4cd964 !important;
+}
+
+
 .icon-text {
   text-align: center;
-  margin-top: 5px
+  margin-top: 5px;
 }
 
 .icon--centered {
@@ -52,6 +70,14 @@
   align-content: center;
   display: flex;
   justify-content: center;
+}
+
+.grid--custom {
+  display: flex;
+  height: 100%;
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 /*rewrite VK style*/

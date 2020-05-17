@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import data from '../services/data';
 
 import {
   Panel,
@@ -22,6 +23,7 @@ import Icon36Add from '@vkontakte/icons/dist/36/add';
 import AddModal from '../components/AddModal';
 
 import Profile from './pages/Profile';
+import Substudy from './pages/sub-study/Substudy';
 import Study from './pages/Study';
 
 import './Home.css';
@@ -31,7 +33,8 @@ const PAGES = {
   MAIN: 'main',
   ADD: 'add',
   GEO: 'geo',
-  PROFILE: 'profile'
+  PROFILE: 'profile',
+  SUBSTUDY: 'substudy'
 };
 
 const MODALS = {
@@ -64,6 +67,7 @@ const CATEGORIES = [
 const Home = ({ id, go, fetchedUser, snackbarError }) => {
   const [activePage, setActivePage] = useState(PAGES.MAIN);
   const [activeModal, setActiveModal] = useState(null);
+  const [activeFraction, setActiveFraction] = useState(null);
 
   const onPageChange = (e) => {
     setActivePage(e.currentTarget.dataset.story);
@@ -74,6 +78,12 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
   };
   const closeModal = () => {
     setActiveModal(null);
+  };
+
+  //попытка
+  const openSubPage = (id) => {
+    let fraction = data.map((el) => el.id == id);
+    setActiveFraction(fraction[0]);
   };
 
   const modal = (
@@ -140,8 +150,17 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
       }
     >
       <View id={PAGES.STUDY} activePanel={PAGES.STUDY}>
-        <Study id={PAGES.STUDY} categories={CATEGORIES}></Study>
+        <Study
+          id={PAGES.STUDY}
+          openSubPage={(openSubPage, onPageChange)}
+          categories={CATEGORIES}
+        ></Study>
       </View>
+
+      <View id={PAGES.SUBSTUDY} activePanel={PAGES.SUBSTUDY}>
+        <Substudy id={PAGES.SUBSTUDY} fraction={activeFraction}></Substudy>
+      </View>
+
       <View id={PAGES.MAIN} activePanel={PAGES.MAIN}>
         <Panel id={PAGES.MAIN}>
           <PanelHeader>Статьи</PanelHeader>

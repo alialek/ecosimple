@@ -70,7 +70,7 @@ const App = () => {
     bridge.subscribe(({ detail: { type, data } }) => {
       if (type === 'VKWebAppUpdateConfig') {
         const schemeAttribute = document.createAttribute('scheme');
-        schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
+        schemeAttribute.value = data.scheme ? 'client_light' : 'client_light';
         document.body.attributes.setNamedItem(schemeAttribute);
       }
     });
