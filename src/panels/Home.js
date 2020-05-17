@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ReactComponent as PaperIcon } from '../img/icons/paper.svg';
-import { ReactComponent as GlassIcon } from '../img/icons/glass.svg';
-import { ReactComponent as MetalIcon } from '../img/icons/metal.svg';
-import { ReactComponent as PlasticIcon } from '../img/icons/plastic.svg';
+
 import {
   Panel,
   PanelHeader,
@@ -11,18 +8,10 @@ import {
   Tabbar,
   TabbarItem,
   View,
-  Text,
   Button,
   ModalRoot,
-  Header,
   ModalPage,
-  Group,
-  CardScroll,
-  Card,
-  Div,
-  Placeholder,
-  Separator,
-  PanelHeaderBack
+  Placeholder
 } from '@vkontakte/vkui';
 import Icon28CubeBoxOutline from '@vkontakte/icons/dist/28/cube_box_outline';
 import Icon28ArticleOutline from '@vkontakte/icons/dist/28/article_outline';
@@ -30,8 +19,10 @@ import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
 import Icon56PlaceOutline from '@vkontakte/icons/dist/56/place_outline';
 import Icon28Profile from '@vkontakte/icons/dist/28/profile';
 import Icon36Add from '@vkontakte/icons/dist/36/add';
-import Stories from '../components/Stories';
 import AddModal from '../components/AddModal';
+
+import Profile from './pages/Profile';
+import Study from './pages/Study';
 
 import './Home.css';
 
@@ -149,84 +140,7 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
       }
     >
       <View id={PAGES.STUDY} activePanel={PAGES.STUDY}>
-        <Panel id={PAGES.STUDY}>
-          <PanelHeader>Обучение</PanelHeader>
-          <Group
-            header={<Header mode="secondary">Основные фракции</Header>}
-            separator="hide"
-          >
-            <CardScroll>
-            
-            <Div>
-                <Card
-                  className="icon-card icon-card--blue "
-                  mode="shadow"
-                  size="s"
-                >
-                  <div className="icon--centered">
-                    <PaperIcon />
-                  </div>
-                </Card>
-                <Text
-                  className="icon-text"
-                  weight="regular"
-                >
-                  Бумага
-                </Text>
-              </Div><Div>
-                <Card
-                  className="icon-card icon-card--orange "
-                  mode="shadow"
-                  size="s"
-                >
-                  <div className="icon--centered">
-                    <PlasticIcon />
-                  </div>
-                </Card>
-                <Text
-                  className="icon-text"
-                  weight="regular"
-                >
-                  Пластик
-                </Text>
-              </Div>
-              <Div>
-                <Card
-                  className="icon-card icon-card--red "
-                  mode="shadow"
-                  size="s"
-                >
-                  <div className="icon--centered">
-                    <MetalIcon />
-                  </div>
-                </Card>
-                <Text
-                  className="icon-text"
-                  weight="regular"
-                >
-                  Металл
-                </Text>
-              </Div>
-              <Div>
-                <Card
-                  className="icon-card icon-card--green "
-                  mode="shadow"
-                  size="s"
-                >
-                  <div className="icon--centered">
-                    <GlassIcon />
-                  </div>
-                </Card>
-                <Text
-                  className="icon-text"
-                  weight="regular"
-                >
-                  Стекло
-                </Text>
-              </Div>
-            </CardScroll>
-          </Group>
-        </Panel>
+        <Study id={PAGES.STUDY} categories={CATEGORIES}></Study>
       </View>
       <View id={PAGES.MAIN} activePanel={PAGES.MAIN}>
         <Panel id={PAGES.MAIN}>
@@ -254,9 +168,7 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
         </Panel>
       </View>
       <View id={PAGES.PROFILE} activePanel={PAGES.PROFILE}>
-        <Panel id={PAGES.PROFILE}>
-          <PanelHeader>Профиль</PanelHeader>
-        </Panel>
+        <Profile id={PAGES.PROFILE}></Profile>
       </View>
     </Epic>
   );

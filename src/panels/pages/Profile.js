@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel, PanelHeader } from '@vkontakte/vkui';
-import Stories from '../components/Stories';
+import Stories from '../../components/Stories';
 
-const Home = ({ id, go, fetchedState, snackbarError }) => (
+const Profile = ({ id, go, fetchedState, snackbarError }) => (
   <Panel id={id}>
     <PanelHeader>Эко Просто</PanelHeader>
     {fetchedState && (
@@ -12,9 +12,9 @@ const Home = ({ id, go, fetchedState, snackbarError }) => (
   </Panel>
 );
 
-Home.propTypes = {
+Profile.propTypes = {
   id: PropTypes.string.isRequired,
-  go: PropTypes.func.isRequired,
+  // go: PropTypes.func.isRequired,
   fetchedUser: PropTypes.shape({
     photo_200: PropTypes.string,
     first_name: PropTypes.string,
@@ -25,4 +25,4 @@ Home.propTypes = {
   })
 };
 
-export default Home;
+export default Profile;

@@ -18,6 +18,8 @@ import {
   Counter
 } from '@vkontakte/vkui';
 
+import CategoryScroll from './CategoryScroll';
+
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Icon24Dismiss from '@vkontakte/icons/dist/24/dismiss';
 
@@ -57,7 +59,7 @@ const AddModal = ({ categories, closeModal, snackbarError }) => {
   }, 50);
 
   return (
-    <div className="add-modal">
+    <Div className="add-modal">
       <ModalPageHeader
         left={
           <Fragment>
@@ -85,17 +87,8 @@ const AddModal = ({ categories, closeModal, snackbarError }) => {
       >
         Добавить отход
       </ModalPageHeader>
-      {categories.length && (
-        <Group>
-          <CardScroll>
-            {categories.map((item) => (
-              <Card size="s" key={item.id}>
-                <div style={{ width: 144, height: 96 }}> {item.name}</div>
-              </Card>
-            ))}
-          </CardScroll>
-        </Group>
-      )}
+      <CategoryScroll categories={categories} />
+
       <FormLayout>
         <Slider
           step={0.1}
@@ -126,7 +119,7 @@ const AddModal = ({ categories, closeModal, snackbarError }) => {
       <Div>
         <Button mode="primary">Добавить</Button>
       </Div>
-    </div>
+    </Div>
   );
 };
 
