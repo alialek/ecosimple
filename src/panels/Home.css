@@ -8,16 +8,41 @@
   outline: none;
 }
 
+.icon-rich-cell {
+  margin-right: 12px !important;
+}
+
 .icon-card {
   width: 96px;
   height: 96px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.photo-card {
+  width: 72px !important;
+  height: 72px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon-card--big {
+  width: 35vw !important;
+
+  height: 35vw !important;
+  text-align: center;
+}
+
+.icon-card--big h1 {
+  font-size: 9vw !important;
+}
+
+.icon-card--clickable {
   cursor: pointer;
   transition: 0.3s;
 }
-
-.icon-card:focus, .icon-card:active {
+.icon-card--clickable:focus,
+.icon-card--clickable:active {
   box-shadow: unset !important;
   transition: 0.3s;
 }
@@ -36,19 +61,33 @@
 .icon-card--small svg {
   width: 40px;
 }
+
+.icon-card--x-small {
+  width: 48px;
+  height: 48px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon-card--x-small svg {
+  width: 30px;
+}
 .icon-card--green {
+  color: rgb(75, 179, 75) !important;
   background: rgba(75, 179, 75, 0.12) !important;
 }
 .icon-card--green svg {
   fill: #4bb34b !important;
 }
 .icon-card--blue {
+  color: rgb(99, 185, 186) !important;
   background: rgba(99, 185, 186, 0.12) !important;
 }
 .icon-card--blue svg {
   fill: #63b9ba !important;
 }
 .icon-card--red {
+  color: rgb(251, 72, 132) !important;
   background: rgba(251, 72, 132, 0.12) !important;
 }
 .icon-card--red svg {
@@ -56,11 +95,11 @@
 }
 .icon-card--orange {
   background: rgba(255, 160, 0, 0.12) !important;
+  color: rgb(255, 160, 0) !important;
 }
 .icon-card--orange svg {
   fill: #ffa000 !important;
 }
-
 
 .icon-card--violet svg {
   fill: #b52dd7 !important;
@@ -78,7 +117,6 @@
   fill: #4cd964 !important;
 }
 
-
 .icon-text {
   text-align: center;
   margin-top: 5px;
@@ -87,6 +125,13 @@
 .icon--centered {
   height: 100%;
   align-content: center;
+  display: flex;
+  justify-content: center;
+}
+.icon--centered-column {
+  height: 100%;
+  align-content: center;
+  flex-direction: column;
   display: flex;
   justify-content: center;
 }
@@ -99,6 +144,34 @@
   justify-content: space-evenly;
 }
 
+
+.global-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  сolor:
+
+}
+.global-stats__left{
+  width: 70%
+}
+.global-stats__right{
+  width: 30%;
+  text-align: right;
+}
+
+.card--bg:after {
+  z-index: 1;
+  position: absolute;
+  content: "";
+  width: 90px;
+  height: 90px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  right: 5px;
+  top: -6px;
+}
+
 /*rewrite VK style*/
 .Card__in {
   width: 100%;
@@ -107,5 +180,23 @@
 .Cell__before-in svg {
   width: 28px;
   height: 28px;
-  padding: 10px 16px 10px 4px
+  padding: 10px 16px 10px 4px;
+}
+
+
+
+@media (min-width: 419px) {
+  .icon-card--big {
+    width: 147px !important;
+    height: 147px !important;
+  }
+
+  .icon-card--big h1 {
+    font-size: 37.728px !important;
+  }
+  /* 
+  .icon-card--small {
+    width: 40px !important;
+    height: 40px !important;
+  } */
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import data from '../services/data';
 
-
 import {
   Panel,
   PanelHeader,
@@ -24,6 +23,7 @@ import Icon36Add from '@vkontakte/icons/dist/36/add';
 import AddModal from '../components/AddModal';
 
 import Profile from './pages/Profile';
+import Posts from './pages/Posts';
 import Location from './pages/Location';
 import Substudy from './pages/sub-study/Substudy';
 import Study from './pages/Study';
@@ -154,7 +154,7 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
       <View id={PAGES.STUDY} activePanel={PAGES.STUDY}>
         <Study
           id={PAGES.STUDY}
-          openSubPage={(openSubPage)}
+          openSubPage={openSubPage}
           categories={CATEGORIES}
         ></Study>
       </View>
@@ -164,9 +164,7 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
       </View>
 
       <View id={PAGES.MAIN} activePanel={PAGES.MAIN}>
-        <Panel id={PAGES.MAIN}>
-          <PanelHeader>Статьи</PanelHeader>
-        </Panel>
+        <Posts id={PAGES.MAIN} />
       </View>
       <View id={PAGES.ADD} activePanel={PAGES.ADD} modal={modal}>
         <Panel id={PAGES.ADD}>
@@ -174,8 +172,8 @@ const Home = ({ id, go, fetchedUser, snackbarError }) => {
         </Panel>
       </View>
       <View id={PAGES.GEO} activePanel={PAGES.GEO}>
-      <Location id={PAGES.GEO}></Location>
-      </View> 
+        <Location id={PAGES.GEO}></Location>
+      </View>
       <View id={PAGES.PROFILE} activePanel={PAGES.PROFILE}>
         <Profile id={PAGES.PROFILE}></Profile>
       </View>
