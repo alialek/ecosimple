@@ -43,7 +43,7 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
             <Div>
               <Card
                 // onClick={openSubPage('paper')}
-                className="icon-card icon-card--blue "
+                className="icon-card icon-card--blue icon-card--clickable"
                 mode="shadow"
                 size="s"
               >
@@ -57,7 +57,7 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
             </Div>
             <Div>
               <Card
-                className="icon-card icon-card--orange "
+                className="icon-card icon-card--orange icon-card--clickable"
                 mode="shadow"
                 size="s"
               >
@@ -71,7 +71,7 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
             </Div>
             <Div>
               <Card
-                className="icon-card icon-card--red "
+                className="icon-card icon-card--red icon-card--clickable"
                 mode="shadow"
                 size="s"
               >
@@ -85,7 +85,7 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
             </Div>
             <Div>
               <Card
-                className="icon-card icon-card--green "
+                className="icon-card icon-card--green icon-card--clickable"
                 mode="shadow"
                 size="s"
               >

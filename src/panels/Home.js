@@ -24,6 +24,7 @@ import Icon36Add from '@vkontakte/icons/dist/36/add';
 
 import useWindowDimensions from '../components/useWindowDimensions';
 import Profile from './pages/Profile';
+import Posts from './pages/Posts';
 import Location from './pages/Location';
 import Substudy from './pages/sub-study/Substudy';
 import Study from './pages/Study';
