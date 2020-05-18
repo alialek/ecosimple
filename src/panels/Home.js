@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import data from '../services/data';
-
 
 import {
   Panel,
@@ -13,7 +12,8 @@ import {
   Button,
   ModalRoot,
   ModalPage,
-  Placeholder
+  FixedLayout,
+  Div
 } from '@vkontakte/vkui';
 import Icon28CubeBoxOutline from '@vkontakte/icons/dist/28/cube_box_outline';
 import Icon28ArticleOutline from '@vkontakte/icons/dist/28/article_outline';
@@ -21,8 +21,8 @@ import Icon28PlaceOutline from '@vkontakte/icons/dist/28/place_outline';
 
 import Icon28Profile from '@vkontakte/icons/dist/28/profile';
 import Icon36Add from '@vkontakte/icons/dist/36/add';
-import AddModal from '../components/AddModal';
 
+import useWindowDimensions from '../components/useWindowDimensions';
 import Profile from './pages/Profile';
 import Location from './pages/Location';
 import Substudy from './pages/sub-study/Substudy';
@@ -39,147 +39,97 @@ const PAGES = {
   SUBSTUDY: 'substudy'
 };
 
-const MODALS = {
-  ADD: 'modal-add'
-};
-
-const CATEGORIES = [
-  {
-    type: 'plastic',
-    id: 1,
-    name: 'Пластик'
-  },
-  {
-    type: 'glass',
-    id: 2,
-    name: 'Стекло'
-  },
-  {
-    type: 'paper',
-    id: 3,
-    name: 'Бумага'
-  },
-  {
-    type: 'metal',
-    id: 4,
-    name: 'Металл'
-  }
-];
-
-const Home = ({ id, go, fetchedUser, snackbarError }) => {
+const Home = ({
+  id,
+  go,
+  fetchedUser,
+  snackbarError,
+  openModal,
+  categories
+}) => {
   const [activePage, setActivePage] = useState(PAGES.MAIN);
-  const [activeModal, setActiveModal] = useState(null);
   const [activeFraction, setActiveFraction] = useState(null);
-
+  const { height, width } = useWindowDimensions();
   const onPageChange = (e) => {
     setActivePage(e.currentTarget.dataset.story);
   };
 
-  const openModal = () => {
-    setActiveModal(MODALS.ADD);
-  };
-  const closeModal = () => {
-    setActiveModal(null);
-  };
-
-  //попытка
-  const openSubPage = (id) => {
-    let fraction = data.map((el) => el.id == id);
-    setActiveFraction(fraction[0]);
-  };
-
-  const modal = (
-    <ModalRoot activeModal={activeModal}>
-      <ModalPage id={MODALS.ADD} onClose={closeModal} dynamicContentHeight>
-        <AddModal
-          categories={CATEGORIES}
-          closeModal={closeModal}
-          snackbarError={snackbarError}
-        />
-      </ModalPage>
-    </ModalRoot>
-  );
-
   return (
-    <Epic
-      activeStory={activePage}
-      tabbar={
-        <Tabbar>
-          <TabbarItem
-            onClick={onPageChange}
-            selected={activePage === PAGES.STUDY}
-            data-story={PAGES.STUDY}
-            text="Обучение"
-          >
-            <Icon28CubeBoxOutline />
-          </TabbarItem>
-          <TabbarItem
-            onClick={onPageChange}
-            selected={activePage === PAGES.MAIN}
-            data-story={PAGES.MAIN}
-            label="12"
-            text="Статьи"
-          >
-            <Icon28ArticleOutline />
-          </TabbarItem>
-          <TabbarItem
-            onClick={onPageChange}
-            selected={activePage === PAGES.ADD}
-            data-story={PAGES.ADD}
-            text="Добавить"
-          >
-            <Button onClick={openModal} className="add-button">
-              <Icon36Add />
-            </Button>
-          </TabbarItem>
-          <TabbarItem
-            onClick={onPageChange}
-            selected={activePage === PAGES.GEO}
-            data-story={PAGES.GEO}
-            text="Ближайшие пункты"
-          >
-            <Icon28PlaceOutline />
-          </TabbarItem>
-          <TabbarItem
-            onClick={onPageChange}
-            selected={activePage === PAGES.PROFILE}
-            data-story={PAGES.PROFILE}
-            text="Ещё"
-          >
-            <Icon28Profile />
-          </TabbarItem>
-        </Tabbar>
-      }
-    >
-      <View id={PAGES.STUDY} activePanel={PAGES.STUDY}>
-        <Study
-          id={PAGES.STUDY}
-          openSubPage={(openSubPage)}
-          categories={CATEGORIES}
-        ></Study>
-      </View>
+    <Fragment>
+      <Div
+        style={{
+          zIndex: 10,
+          position: 'fixed',
+          bottom: 0,
+          left: width / 2 - 25
+        }}
+      >
+        <Button onClick={openModal} className="add-button">
+          <Icon36Add />
+        </Button>
+      </Div>
+      <Epic
+        activeStory={activePage}
+        tabbar={
+          <Tabbar>
+            <TabbarItem
+              onClick={onPageChange}
+              selected={activePage === PAGES.STUDY}
+              data-story={PAGES.STUDY}
+              text="Обучение"
+            >
+              <Icon28CubeBoxOutline />
+            </TabbarItem>
+            <TabbarItem
+              onClick={onPageChange}
+              selected={activePage === PAGES.MAIN}
+              data-story={PAGES.MAIN}
+              label="12"
+              text="Статьи"
+            >
+              <Icon28ArticleOutline />
+            </TabbarItem>
+            <TabbarItem></TabbarItem>
+            <TabbarItem
+              onClick={onPageChange}
+              selected={activePage === PAGES.GEO}
+              data-story={PAGES.GEO}
+              text="Гео"
+            >
+              <Icon28PlaceOutline />
+            </TabbarItem>
+            <TabbarItem
+              onClick={onPageChange}
+              selected={activePage === PAGES.PROFILE}
+              data-story={PAGES.PROFILE}
+              text="Ещё"
+            >
+              <Icon28Profile />
+            </TabbarItem>
+          </Tabbar>
+        }
+      >
+        <View id={PAGES.STUDY} activePanel={PAGES.STUDY}>
+          <Study id={PAGES.STUDY} categories={categories}></Study>
+        </View>
 
-      <View id={PAGES.SUBSTUDY} activePanel={PAGES.SUBSTUDY}>
-        <Substudy id={PAGES.SUBSTUDY} fraction={activeFraction}></Substudy>
-      </View>
+        <View id={PAGES.SUBSTUDY} activePanel={PAGES.SUBSTUDY}>
+          <Substudy id={PAGES.SUBSTUDY} fraction={activeFraction}></Substudy>
+        </View>
 
-      <View id={PAGES.MAIN} activePanel={PAGES.MAIN}>
-        <Panel id={PAGES.MAIN}>
-          <PanelHeader>Статьи</PanelHeader>
-        </Panel>
-      </View>
-      <View id={PAGES.ADD} activePanel={PAGES.ADD} modal={modal}>
-        <Panel id={PAGES.ADD}>
-          <PanelHeader>Добавить</PanelHeader>
-        </Panel>
-      </View>
-      <View id={PAGES.GEO} activePanel={PAGES.GEO}>
-      <Location id={PAGES.GEO}></Location>
-      </View> 
-      <View id={PAGES.PROFILE} activePanel={PAGES.PROFILE}>
-        <Profile id={PAGES.PROFILE}></Profile>
-      </View>
-    </Epic>
+        <View id={PAGES.MAIN} activePanel={PAGES.MAIN}>
+          <Panel id={PAGES.MAIN}>
+            <PanelHeader>Статьи</PanelHeader>
+          </Panel>
+        </View>
+        <View id={PAGES.GEO} activePanel={PAGES.GEO}>
+          <Location id={PAGES.GEO}></Location>
+        </View>
+        <View id={PAGES.PROFILE} activePanel={PAGES.PROFILE}>
+          <Profile id={PAGES.PROFILE}></Profile>
+        </View>
+      </Epic>
+    </Fragment>
   );
 };
 

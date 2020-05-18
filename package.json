@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env PORT=10888 HTTPS=true react-scripts start",
+    "start": "cross-env PORT=10888 HTTPS=true HOST=192.168.56.1 react-scripts start",
+    "dev": "ngrok http 10888",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "vk-miniapps-deploy"

@@ -42,7 +42,7 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
           <CardScroll>
             <Div>
               <Card
-                onClick={openSubPage('paper')}
+                // onClick={openSubPage('paper')}
                 className="icon-card icon-card--blue "
                 mode="shadow"
                 size="s"
@@ -247,7 +247,12 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
                 <List>
                   {el.content.map((check, i) => {
                     return (
-                      <Cell description={check.description} multiline key={i} before={check.icon}>
+                      <Cell
+                        description={check.description}
+                        multiline
+                        key={i}
+                        before={check.icon}
+                      >
                         {check.name}
                       </Cell>
                     );
@@ -263,8 +268,8 @@ const Study = ({ id, go, fetchedState, snackbarError, openSubPage }) => {
 
 Study.propTypes = {
   id: PropTypes.string.isRequired,
-  go: PropTypes.func.isRequired,
-  openSubPage: PropTypes.func.isRequired,
+  // go: PropTypes.func.isRequired,
+  // openSubPage: PropTypes.func.isRequired,
   fetchedUser: PropTypes.shape({
     photo_200: PropTypes.string,
     first_name: PropTypes.string,

@@ -1,15 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Group,
-  Card,
-  CardScroll,
   withModalRootContext,
-  ANDROID,
-  IOS,
-  usePlatform,
-  PanelHeaderButton,
-  ModalPageHeader,
   Div,
   Button,
   Slider,
@@ -18,7 +10,7 @@ import {
   Counter
 } from '@vkontakte/vkui';
 
-import CategoryScroll from './CategoryScroll';
+import Tab from './Tab';
 
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Icon24Dismiss from '@vkontakte/icons/dist/24/dismiss';
@@ -49,77 +41,88 @@ function throttle(callback, delay) {
   return wrapper;
 }
 
-const AddModal = ({ categories, closeModal, snackbarError }) => {
-  const platform = usePlatform();
-  const [amount, setAmount] = useState(2);
-
-  const onAmountChange = throttle((newAmount) => {
-    if (newAmount === amount) return;
-    setAmount(newAmount);
-  }, 50);
+const AddModal = ({
+  categories,
+  openModal,
+  goView,
+  routes,
+  go,
+  snackbarError,
+  activeCategory,
+  onAmountChange,
+  changeCategory
+}) => {
+  const goCheckList = (category) => {
+    openModal('modal-checklist');
+  };
 
   return (
-    <Div className="add-modal">
-      <ModalPageHeader
-        left={
-          <Fragment>
-            {platform === ANDROID && (
-              <PanelHeaderButton onClick={closeModal}>
-                <Icon24Cancel />
-              </PanelHeaderButton>
-            )}
-          </Fragment>
-        }
-        right={
-          <Fragment>
-            {/* {platform === ANDROID && (
-              <PanelHeaderButton onClick={closeModal}>
-                <Icon24Done />
-              </PanelHeaderButton>
-            )} */}
-            {platform === IOS && (
-              <PanelHeaderButton onClick={closeModal}>
-                <Icon24Dismiss />
-              </PanelHeaderButton>
-            )}
-          </Fragment>
-        }
-      >
-        Добавить отход
-      </ModalPageHeader>
-      <CategoryScroll categories={categories} />
-
-      <FormLayout>
-        <Slider
-          step={0.1}
-          min={0}
-          max={10}
-          value={Number(amount)}
-          top={
-            <Header
-              indicator={
-                <Counter size="m" mode="primary">
-                  {amount} кг
-                </Counter>
-              }
-            >
-              <span role="img" aria-label="Количество отходов">
-                ♻️
-              </span>{' '}
-              Количеcтво отходов
-            </Header>
+    <Fragment>
+      <Div className="category-buttons">
+        {categories.map((category) => {
+          return (
+            <Tab
+              activeTab={activeCategory}
+              key={category.id}
+              category={category.id}
+              label={category.name}
+              onClick={changeCategory}
+            />
+          );
+        })}
+      </Div>
+      <Div className="tab-content">
+        {categories.map((category) => {
+          if (category.id !== activeCategory.id) return undefined;
+          if (activeCategory.id) {
+            return (
+              <Fragment key={category.id}>
+                <FormLayout>
+                  <Slider
+                    key={category.id}
+                    step={0.1}
+                    min={0}
+                    max={10}
+                    value={activeCategory.amount}
+                    top={
+                      <Header
+                        indicator={
+                          <Counter
+                            size="m"
+                            mode="primary"
+                            style={{ minWidth: '48px' }}
+                          >
+                            {activeCategory.amount} кг
+                          </Counter>
+                        }
+                      >
+                        <span role="img" aria-label="Количество отходов"></span>
+                        Количеcтво отходов
+                      </Header>
+                    }
+                    onChange={(amount) => onAmountChange(amount)}
+                  />
+                  <Div style={{ display: 'flex' }}>
+                    <Button
+                      size="l"
+                      stretched
+                      mode="secondary"
+                      style={{ marginRight: 8 }}
+                      onClick={() => goView('extra')}
+                    >
+                      Пройти чек-лист
+                    </Button>
+                    <Button size="l" stretched onClick={() => {}}>
+                      Добавить
+                    </Button>
+                  </Div>
+                </FormLayout>
+              </Fragment>
+            );
           }
-          onChange={(amount) => onAmountChange(amount)}
-        />
-      </FormLayout>
-
-      <Div>
-        <Button mode="commerce">Пройти чек-лист</Button>
+        })}
       </Div>
-      <Div>
-        <Button mode="primary">Добавить</Button>
-      </Div>
-    </Div>
+    </Fragment>
   );
 };
 
